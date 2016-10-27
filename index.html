@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" ng-app="list">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!--<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="./js/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/angular.js/1.5.8/angular.js"></script>-->
+    <script src="./js/angular.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/index.js"></script>
+</head>
+<body ng-controller="mainCtrl">
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 header">
+            <div class="icloud">icloud</div>
+            <!-- Single button -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="btn">
+                    提醒事项 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <span class="add" ng-click="add()">+</span>
+        </div>
+        <div class="col-md-9 header1">
+            <div class="search-box">
+                <span class="search-icon"></span>
+                <input type="text" id="inputEmail3" placeholder="搜索所有提醒">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row content-box">
+        <div class="col-md-3 col-sm-4 tittle-box">
+            <div class="col-md-12 border-bto1"><span id="iconfont1" class="iconfont icon-naozhong"></span>
+                <div class="played">已计划</div>
+            </div>
+            <list-div>
+                <li class="col-md-12 lis" ng-repeat="v in as" ng-click="addcurrent(v)" data-id="{{v.id}}"><span
+                        class="round {{v.color}}"></span><span class="names  border-bto1">{{v.title}}</span><input
+                        class="tittle-name played  border-bto1" ng-model="v.title"></li>
+            </list-div>
+        </div>
+        <div class="col-md-9  col-sm-8">
+            <div class="col-md-12 title ci-font0 {{rounds1}}"><input type="text" ng-model="current.title"
+                                                                     class="tittle-name to-title">
+                <div class="lists" ng-init="bb=true" ng-click="bb=!bb">选项
+                    <div class="color-box" ng-class="{hid:bb}">
+                        <input class="font-style ci-font0" ng-model="current.title">
+                        <div class="color-name">列表颜色</div>
+                        <color-box>
+                            <ul class="color-style">
+                                <li class="quan " ng-repeat="v in color" data-col="{{v}}">
+                                    <div class="{{v}}"></div>
+                                </li>
+                            </ul>
+                        </color-box>
+                        <button id="btn3" >删除</button>
+                        <button id="btn1" ng-click="bb=true">完成</button>
+                        <button id="btn2" ng-click="bb=true">取消</button>
+                    </div>
+                </div>
+            </div>
+            <ul class="col-md-12 ko line ci-font0 {{rounds1}}">
+                <span class="finshed" ng-init="aa=true" ng-click="aa=!aa">已完成 <span class="nums">{{num}}</span></span>
+                <div class="col-md-12 line bgs1" ng-class="{todos:aa};" ng-repeat="v in current.todos|filter:{state:1}">
+                    <div class="quan1 circle0 {{rounds2}}" ng-click="nums();v.state=0">
+                        <div class="rounds {{rounds}}"></div>
+                    </div>
+                    <span class="border-bto2">
+                        <input type="text" ng-model="v.title" class="to-title" ng-blur="xiaoshi(v.id,v.title)">
+                        <span class="delete" ng-click="delete(v.id)">删除</span>
+                    </span>
+                </div>
+            </ul>
+            <ul class="col-md-12 ko ci-font0 {{rounds1}}">
+                未完成
+                <finish>
+
+                </finish>
+            </ul>
+            <ul class=" line new news1">新建项目....</ul>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
